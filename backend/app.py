@@ -14,7 +14,8 @@ def init_db():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
             content TEXT NOT NULL,
-            author TEXT
+            author TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     ''')
     cursor.execute('''
@@ -23,6 +24,7 @@ def init_db():
             content TEXT NOT NULL,
             author TEXT,
             post_id INTEGER,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (post_id) REFERENCES posts(id)
         )
     ''')
@@ -34,22 +36,22 @@ def init_db():
 def get_posts():
     conn = sqlite3.connect('db.sqlite3')
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM posts')
-    posts = cursor.fetchall()
-
+    cursor.execute('SELECT * FROM posts order by created_at desc')
+    posts = cursor.fetchall() # [(1,"Title1","Content1","Author1","2021-09-01 12:00:00"), ...]
     result = []
     for post in posts:
         post_id = post[0]
-        cursor.execute('SELECT * FROM comments WHERE post_id = ?', (post_id,))
+        cursor.execute('SELECT * FROM comments WHERE post_id = ? order by created_at desc', (post_id,))
         comments = cursor.fetchall()
         
-        comment_list = [{'id': comment[0], 'content': comment[1], 'author': comment[2]} for comment in comments]
+        comment_list = [{'id': comment[0], 'content': comment[1], 'author': comment[2], 'timestamp': comment[4]} for comment in comments]
 
         result.append({
             'id': post[0],
             'title': post[1],
             'content': post[2],
             'author': post[3],
+            'timestamp': post[4],
             'comments': comment_list
         })
     
@@ -62,7 +64,7 @@ def create_post():
     data = request.get_json()
     title = data['title']
     content = data['content']
-    author = data.get('author', 'Anonymous')
+    author = data.get('author', 'Anonymous') 
 
     print(f"Received data: {title}, {content}, {author}")  # Debugging line
 
