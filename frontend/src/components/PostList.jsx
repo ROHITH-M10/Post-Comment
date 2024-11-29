@@ -70,6 +70,8 @@ function PostList() {
             required
             />
 
+            
+
             <input
             type="text"
             name="author"
@@ -105,7 +107,14 @@ function PostList() {
                 {post.comments.map((comment) => (
                 <div key={comment.id} className="comment">
                     <div className='comment-by'>@{comment.author}</div>
-                    <div className='content'>{""}{comment.content}</div>
+                    {
+                      comment.style === 'link' ? (
+                        <a href={comment.content} className={`comment-content-list ${comment.style}`}>{comment.content}</a>
+                      ) : (
+                        <div className= {`comment-content-list ${comment.style}`}>{comment.content}</div>
+                      )
+                    }
+                
                     <div className='time-stamp'>{comment.timestamp}</div>
                 </div>
                 ))}

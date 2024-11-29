@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function CommentForm({ postId, refreshComments }) {
+
   const [comment, setComment] = useState({
     content: '',
-    author: ''
+    author: '',
+    style: 'text', // Default style
   });
 
   const handleCommentChange = (e) => {
@@ -15,9 +17,9 @@ function CommentForm({ postId, refreshComments }) {
     e.preventDefault();
     try {
       await axios.post(`http://127.0.0.1:5000/api/posts/${postId}/comments`, comment);
-      setComment({ content: '', author: '' });  // Reset the form
-    //   refreshComments(postId);  // Refresh comments for the post
-    refreshComments();
+      console.log(comment)
+      setComment({ content: '', author: '', style: 'text' }); // Reset the form
+      refreshComments();
     } catch (error) {
       console.error('Error adding comment:', error);
     }
@@ -25,25 +27,63 @@ function CommentForm({ postId, refreshComments }) {
 
   return (
     <div className='CommentForm'>
-      {/* <div className="heading">Comments</div> */}
       <form onSubmit={handleSubmitComment}>
         <div className="comment-form-input">
-            <input
+          <input
             name="content"
             placeholder="Add a comment..."
             className='comment-content'
             value={comment.content}
             onChange={handleCommentChange}
             required
-            />
-            <input
+          />
+          <input
             type="text"
             name="author"
             placeholder="Your name"
             className='comment-author'
             value={comment.author}
             onChange={handleCommentChange}
+          />
+
+          <div className="radio-buttons">
+            <input
+              type="radio"
+              name="style"
+              value="text"
+              checked={comment.style === 'text'}
+              onChange={handleCommentChange}
             />
+            <label htmlFor="text">Text</label>
+
+            <input
+              type="radio"
+              name="style"
+              value="bold"
+              checked={comment.style === 'bold'}
+              onChange={handleCommentChange}
+            />
+            <label htmlFor="bold">Bold</label>
+
+            <input
+              type="radio"
+              name="style"
+              value="italic"
+              checked={comment.style === 'italic'}
+              onChange={handleCommentChange}
+            />
+            <label htmlFor="italic">Italic</label>
+
+            <input
+              type="radio"
+              name="style"
+              value="link"
+              checked={comment.style === 'link'}
+              onChange={handleCommentChange}
+            />
+            <label htmlFor="link">Link</label>
+
+          </div>
         </div>
         <button type="submit" className='comment-submit'>Comment</button>
       </form>
