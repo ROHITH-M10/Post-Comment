@@ -77,3 +77,7 @@ The app will be available in your browser at `http://localhost:3000`.
 ### Styling:
 The app uses custom CSS, and the styles are defined in the `style.css` file. The app has a dark theme with easy-to-read typography and layout.
 
+## Screenshots
+
+![Image 1](image1.png)
+![Image 2](image2.png)
