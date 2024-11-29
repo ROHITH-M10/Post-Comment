@@ -23,6 +23,7 @@ def init_db():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             content TEXT NOT NULL,
             author TEXT,
+            style TEXT,
             post_id INTEGER,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (post_id) REFERENCES posts(id)
@@ -44,7 +45,7 @@ def get_posts():
         cursor.execute('SELECT * FROM comments WHERE post_id = ? order by created_at desc', (post_id,))
         comments = cursor.fetchall()
         
-        comment_list = [{'id': comment[0], 'content': comment[1], 'author': comment[2], 'timestamp': comment[4]} for comment in comments]
+        comment_list = [{'id': comment[0], 'content': comment[1], 'author': comment[2],'style': comment[3] , 'timestamp': comment[5]} for comment in comments]
 
         result.append({
             'id': post[0],
@@ -86,10 +87,11 @@ def add_comment(post_id):
     data = request.get_json()
     content = data['content']
     author = data.get('author', 'Anonymous')
+    style = data.get('style', 'text')
 
     conn = sqlite3.connect('db.sqlite3')
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO comments (content, author, post_id) VALUES (?, ?, ?)', (content, author, post_id))
+    cursor.execute('INSERT INTO comments (content, author, style, post_id) VALUES (?, ?, ?, ?)', (content, author, style, post_id))
     conn.commit()
     conn.close()
 
