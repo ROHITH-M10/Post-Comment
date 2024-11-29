@@ -127,6 +127,24 @@
   outline: none;
 }
 
+.radio-buttons{
+  display: flex;
+  flex-direction: row;
+  margin: 5px 0;
+}
+
+.radio-buttons input{
+
+}
+
+.radio-buttons label{
+  font-size: 1rem;
+  color: #ffffff;
+  padding-right: 15px;
+
+}
+
+
 .comment-submit {
   padding: 5px;
   border-radius: 5px;

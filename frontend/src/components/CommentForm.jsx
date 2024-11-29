@@ -37,7 +37,51 @@ function CommentForm({ postId, refreshComments }) {
             onChange={handleCommentChange}
             required
           />
-          <input
+
+          <div className="radio-buttons">
+            <input
+              type="radio"
+              id = {`text-${postId}`}
+              name="style"
+              value="text"
+              checked={comment.style === 'text'}
+              onChange={handleCommentChange}
+            />
+            <label htmlFor={`text-${postId}`}>Text</label>
+
+            <input
+              type="radio"
+              id={`bold-${postId}`}
+              name="style"
+              value="bold"
+              checked={comment.style === 'bold'}
+              onChange={handleCommentChange}
+            />
+            <label htmlFor={`bold-${postId}`}>Bold</label>
+
+            <input
+              type="radio"
+              id={`italic-${postId}`}
+              name="style"
+              value="italic"
+              checked={comment.style === 'italic'}
+              onChange={handleCommentChange}
+            />
+            <label htmlFor ={`italic-${postId}`}>Italic</label>
+
+            <input
+              type="radio"
+              id={`link-${postId}`}
+              name="style"
+              value="link"
+              checked={comment.style === 'link'}
+              onChange={handleCommentChange}
+            />
+            <label htmlFor={`link-${postId}`}>Link</label>
+
+            </div>
+
+            <input
             type="text"
             name="author"
             placeholder="Your name"
@@ -46,44 +90,7 @@ function CommentForm({ postId, refreshComments }) {
             onChange={handleCommentChange}
           />
 
-          <div className="radio-buttons">
-            <input
-              type="radio"
-              name="style"
-              value="text"
-              checked={comment.style === 'text'}
-              onChange={handleCommentChange}
-            />
-            <label htmlFor="text">Text</label>
 
-            <input
-              type="radio"
-              name="style"
-              value="bold"
-              checked={comment.style === 'bold'}
-              onChange={handleCommentChange}
-            />
-            <label htmlFor="bold">Bold</label>
-
-            <input
-              type="radio"
-              name="style"
-              value="italic"
-              checked={comment.style === 'italic'}
-              onChange={handleCommentChange}
-            />
-            <label htmlFor="italic">Italic</label>
-
-            <input
-              type="radio"
-              name="style"
-              value="link"
-              checked={comment.style === 'link'}
-              onChange={handleCommentChange}
-            />
-            <label htmlFor="link">Link</label>
-
-          </div>
         </div>
         <button type="submit" className='comment-submit'>Comment</button>
       </form>

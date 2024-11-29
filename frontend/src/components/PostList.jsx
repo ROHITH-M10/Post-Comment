@@ -109,7 +109,7 @@ function PostList() {
                     <div className='comment-by'>@{comment.author}</div>
                     {
                       comment.style === 'link' ? (
-                        <a href={comment.content} className={`comment-content-list ${comment.style}`}>{comment.content}</a>
+                        <a href={comment.content} target='_blank' className={`comment-content-list ${comment.style}`}>{comment.content}</a>
                       ) : (
                         <div className= {`comment-content-list ${comment.style}`}>{comment.content}</div>
                       )
