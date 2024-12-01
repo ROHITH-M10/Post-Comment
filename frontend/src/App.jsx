@@ -15,9 +15,7 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+
 
   return (
     <div className="App">

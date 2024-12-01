@@ -5,7 +5,7 @@ import ShowComments from './ShowComments';
 function ShowPosts({ fetchPosts, posts }) {
     useEffect(() => {
       fetchPosts();
-    }, [fetchPosts]);
+    }, []);
   
     return (
       <div className="PostList">

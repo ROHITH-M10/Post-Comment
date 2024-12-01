@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import CommentForm from './CommentForm'; // Assuming you have a separate CommentForm component for adding comments
-
+import CommentForm from './CommentForm';
 function ShowComments({ post }) {  
 
   return (
