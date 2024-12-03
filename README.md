@@ -11,7 +11,7 @@
 
 ## Architecture
 This project follows a simple architecture:
-- **Frontend**: Built with React, focusing on components like `PostList` and `CommentForm`.
+- **Frontend**: Built with React.
 - **Backend**: Flask is used for handling CRUD operations for posts and comments, with **SQLite** for storage.
 
 
