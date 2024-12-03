@@ -1,4 +1,3 @@
-
 # Postgram - A Post and Comment App
 
 ## Overview
@@ -8,6 +7,25 @@
 - **View Posts**: Displays a list of posts with the title, content, author, and timestamp.
 - **Add Comments**: Users can add comments to posts and choose text formatting (bold, italic, link).
 
+## Database Details
+The backend uses **SQLite** as its database, which is a lightweight, serverless SQL database. Two tables are used in this project:
+
+### 1. `posts` Table
+Stores information about the posts.
+- **`id`**: Primary key, auto-incremented.
+- **`title`**: Title of the post.
+- **`content`**: Content of the post.
+- **`author`**: Author of the post (default: "Anonymous").
+- **`created_at`**: Timestamp of when the post was created (automatically set).
+
+### 2. `comments` Table
+Stores information about the comments associated with posts.
+- **`id`**: Primary key, auto-incremented.
+- **`content`**: Content of the comment.
+- **`author`**: Author of the comment (default: "Anonymous").
+- **`style`**: Formatting style of the comment (e.g., text, bold, italic).
+- **`post_id`**: Foreign key referencing the post's `id`.
+- **`created_at`**: Timestamp of when the comment was created (automatically set).
 
 ## Architecture
 This project follows a simple architecture:
